@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: localhost:32000/api:2154
+        image: localhost:32000/api:1501
         ports: 
         - containerPort: 5000
 
