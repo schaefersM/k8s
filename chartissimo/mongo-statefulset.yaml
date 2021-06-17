@@ -35,7 +35,6 @@ spec:
     spec:
       containers:
       - name: mongo
-        # image: localhost:32000/mongo:0034
         image: mongo:4.4.4
         ports:
         - containerPort: 27017
@@ -43,15 +42,30 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data/db
-        # - name: config
-        #   mountPath: /data/configdb
+        #only when initializing
+        # - name: initdb
+        #   mountPath: /docker-entrypoint-initdb.d
+        # - name: createUser
+        #   mountPath: /docker-entrypoint-initdb.d
+        # - name: dumps
+        #   mountPath: /dumps
       volumes:
       - name: data
         persistentVolumeClaim:
           claimName: mongoclaim
-      # - name: config
-      #   persistentVolumeClaim:
-      #     claimName: mongoclaim
+      #only when initializing
+      # - name: initdb
+      #   hostPath: 
+      #     path: /home/devops/chartissimo/mongodb/init.sh
+      #     type: File
+      # - name: createUser
+      #   hostPath:
+      #     path: /home/devops/chartissimo/mongodb/createDbUser.js
+      #     type: File
+      # - name: dumps
+      #   hostPath:
+      #     path: /home/devops/chartissimo/mongodb/dump
+      #     type: Directory
 
 ---
 apiVersion: v1
