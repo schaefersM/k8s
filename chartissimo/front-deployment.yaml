@@ -5,7 +5,7 @@ metadata:
   labels:
     app: chartissimo
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: chartissimo
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: localhost:32000/front:port
+        image: localhost:32000/client:1308
         ports: 
         - containerPort: 80
         # env:
