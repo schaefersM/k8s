@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: java-user
+  labels:
+    app: chartissimo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chartissimo
+  template:
+    metadata:
+      labels:
+        app: chartissimo
+    spec:
+      containers:
+      - name: java-user
+        image: localhost:32000/java-user:21061400
+        ports: 
+        - containerPort: 8080

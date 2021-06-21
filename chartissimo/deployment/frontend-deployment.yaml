@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: frontend
+  labels:
+    app: chartissimo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chartissimo
+  template:
+    metadata:
+      labels:
+        app: chartissimo
+    spec:
+      containers:
+      - name: frontend
+        image: localhost:32000/client:1308
+        ports: 
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: frontend-configmap

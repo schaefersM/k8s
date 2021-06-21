@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: maria
+spec:
+  selector:
+    matchLabels:
+      app: maria
+  serviceName: "maria"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: maria
+    spec:
+      containers:
+      - name: maria
+        image: mariadb:10.4
+        ports:
+        - containerPort: 3306
+          name: maria
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d
+        envFrom:
+          - configMapRef:
+              name: maria-configmap
+
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: mariaclaim
+      #only when initializing
+      # - name: initdb
+      #   hostPath: 
+      #     path: /home/devops/chartissimo/mariadb/initdb
+      #     type: Directory
