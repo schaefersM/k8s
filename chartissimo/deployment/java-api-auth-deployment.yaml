@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: user
+  name: auth
   labels:
     app: chartissimo
 spec:
@@ -15,7 +15,7 @@ spec:
         app: chartissimo
     spec:
       containers:
-      - name: user
-        image: localhost:32000/java-user:21061400
+      - name: auth
+        image: localhost:32000/java-auth:0150
         ports: 
-        - containerPort: 7000
+        - containerPort: 6000
