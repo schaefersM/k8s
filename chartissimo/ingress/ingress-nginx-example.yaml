@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /   #new 
+  name: example-app
+  # namespace: example-app
+spec:
+  tls:
+  - hosts:
+    - chartissimo.test
+    secretName: marcel-tls-secret
+  rules:
+  # - host: chartissimo.test
+    # http:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: frontend
+            port: 
+              number: 80
+          # serviceName: frontend
+          # servicePort: 80
+      # - path: /v2/hello
+      #   backend:
+      #     serviceName: example-service
+      #     servicePort: 80
